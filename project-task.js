@@ -43,7 +43,13 @@ Step-by-Step:
 2. Use the `filter()` method to apply the callback to the array.
 3. Return the filtered result.
 */
-
+function filterProducts(cb) {
+  return function(arr) {
+    return arr.filter(cb);
+  }
+}
+const inStockFilter = filterProducts(x => x.inStock);
+productsInStock = inStockFilter(products);
 
 /*
 🔹 Task 2: Transform Product Names
@@ -55,7 +61,7 @@ Step-by-Step:
 2. Extract and transform the `name` property to uppercase.
 3. Store the result in a new variable.
 */
-
+const uppercaseProductNames = products.map(x => x.name = x.name.toUpperCase());
 
 /*
 🔹 Task 3: Generate Discounted Prices
@@ -70,7 +76,13 @@ Step-by-Step:
 3. Use this returned function inside a `forEach()` call to add a new property, `salePrice`, to each product object.
 4. Print the array of products to verify the new property and value have been added to each product object.
 */
-
+function applyDiscount(discountPercent) {
+  return function calculateSalePrice(product) {
+    product.salePrice = product.price * (100 - discountPercent) / 100;
+  }
+}
+const tenPrct = applyDiscount(10);
+products.forEach(tenPrct);
 
 /*
 🔹 Task 4: Calculate Total Inventory Value
@@ -82,13 +94,20 @@ Step-by-Step:
 2. Add only the prices of products where `inStock` is true.
 3. Store the total in a new variable.
 */
+const currentInventoryValue = products.reduce((acc, curr) => {
+  if (curr.inStock) {
+    console.log(curr);
+    return acc + curr.price;
+  }
+  return acc;
+}, 0);
 
 
 // ============================================
 // 🧪 Console Test Your Work
 // ============================================
 
-// console.log("Filtered products:", ...);
-// console.log("Uppercased names:", ...);
-// console.log("Discounted products:", ...);
-// console.log("Total value in stock:", ...);
+console.log("Filtered products:", productsInStock);
+console.log("Uppercased names:", uppercaseProductNames);
+console.log("Discounted products:", products);
+console.log("Total value in stock:", currentInventoryValue);

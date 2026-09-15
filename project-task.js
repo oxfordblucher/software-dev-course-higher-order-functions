@@ -43,13 +43,10 @@ Step-by-Step:
 2. Use the `filter()` method to apply the callback to the array.
 3. Return the filtered result.
 */
-function filterProducts(cb) {
-  return function(arr) {
-    return arr.filter(cb);
-  }
+function filterProducts(arr, cb) {
+  return arr.filter(cb);
 }
-const inStockFilter = filterProducts(x => x.inStock);
-productsInStock = inStockFilter(products);
+const productsInStock = filterProducts(products, x => x.inStock);
 
 /*
 🔹 Task 2: Transform Product Names
@@ -61,7 +58,7 @@ Step-by-Step:
 2. Extract and transform the `name` property to uppercase.
 3. Store the result in a new variable.
 */
-const uppercaseProductNames = products.map(x => x.name = x.name.toUpperCase());
+const uppercaseProductNames = products.map(x => x.name.toUpperCase());
 
 /*
 🔹 Task 3: Generate Discounted Prices
